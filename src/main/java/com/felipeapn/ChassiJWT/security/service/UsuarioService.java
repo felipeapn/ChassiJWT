@@ -1,5 +1,6 @@
 package com.felipeapn.ChassiJWT.security.service;
 
+import com.felipeapn.ChassiJWT.exception.ObjectNotFoundException;
 import com.felipeapn.ChassiJWT.security.dto.UsuarioDTO;
 import com.felipeapn.ChassiJWT.security.entity.Usuario;
 import com.felipeapn.ChassiJWT.security.repository.UsuarioRepository;
@@ -16,6 +17,6 @@ public class UsuarioService {
 
     public UsuarioDTO findById (Long id) {
         Optional<Usuario> optionalUsuario = usuarioRepository.findById(id);
-        return new UsuarioDTO(optionalUsuario.orElse(null));
+        return new UsuarioDTO(optionalUsuario.orElseThrow(() -> new ObjectNotFoundException("Usuario não encontrado")));
     }
 }
