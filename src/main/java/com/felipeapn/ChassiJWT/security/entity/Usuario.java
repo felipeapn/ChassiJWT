@@ -47,7 +47,6 @@ public class Usuario extends Pessoa {
         super();
         this.id = usuarioDTO.getId();
         this.nome = usuarioDTO.getNome();
-        this.cpf = usuarioDTO.getCpf();
         this.telefone = usuarioDTO.getTelefone();
         this.email = usuarioDTO.getEmail();
         this.senha = usuarioDTO.getSenha();

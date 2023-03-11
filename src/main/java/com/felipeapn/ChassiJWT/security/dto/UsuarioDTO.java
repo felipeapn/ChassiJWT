@@ -25,19 +25,16 @@ public class UsuarioDTO implements Serializable {
 
     private Long id;
 
-    @NotBlank(message = "O campo Nome é obrigatório.")
+    @NotBlank(message = "Field name is mandatory.")
     private String nome;
 
-    @NotNull(message = "O campo CPF é obrigatório.")
-    private String cpf;
-
-    @NotNull(message = "O campo Telefone é obrigatório.")
+    @NotNull(message = "Field phone number is mandatory.")
     private String telefone;
 
-    @NotNull(message = "O campo E-mail é obrigatório.")
+    @NotNull(message = "Field email is mandatory.")
     private String email;
 
-    @NotNull(message = "O campo Senha é obrigatório.")
+    @NotNull(message = "Field password is mandatory.")
     private String senha;
 
     private Set<Integer> perfis = new HashSet<>();
@@ -51,7 +48,6 @@ public class UsuarioDTO implements Serializable {
         super();
         this.id = usuario.getId();
         this.nome = usuario.getNome();
-        this.cpf = usuario.getCpf();
         this.telefone = usuario.getTelefone();
         this.email = usuario.getEmail();
         this.senha = usuario.getSenha();

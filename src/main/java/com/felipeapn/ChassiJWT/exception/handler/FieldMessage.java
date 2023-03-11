@@ -1,7 +1,6 @@
 package com.felipeapn.ChassiJWT.exception.handler;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,16 +8,13 @@ import java.io.Serial;
 import java.io.Serializable;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class StandardError implements Serializable {
+public class FieldMessage implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private Long timestamp;
-    private String error;
+    private String fieldName;
     private String message;
-    private String path;
 }
