@@ -2,8 +2,10 @@ package com.felipeapn.ChassiJWT.services;
 
 import com.felipeapn.ChassiJWT.security.dto.UsuarioDTO;
 import com.felipeapn.ChassiJWT.security.entity.Usuario;
+import com.felipeapn.ChassiJWT.security.enums.PerfilEnum;
 import com.felipeapn.ChassiJWT.security.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -14,20 +16,25 @@ public class DBService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
+    @Autowired
+    BCryptPasswordEncoder encoder;
+
     public void instaciaDB() {
         UsuarioDTO usuarioDTO = UsuarioDTO.builder()
                 .email("valdir@gmail.com")
                 .nome("Valdir")
-                .senha("123")
+                .senha(encoder.encode("123"))
                 .telefone("604604604")
                 .id(1l)
                 .build();
+
         Usuario usuario1 = new Usuario(usuarioDTO);
+        usuario1.addPerfil(PerfilEnum.ADMIN);
 
         usuarioDTO = UsuarioDTO.builder()
                 .email("felipe@gmail.com")
                 .nome("Felipe")
-                .senha("123")
+                .senha(encoder.encode("123"))
                 .telefone("604604604")
                 .id(2l)
                 .build();

@@ -30,7 +30,7 @@ import java.util.Arrays;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig  {
 
-    private static final String[] PUBLIC_MATCHERS = { "/h2-console/**", "/usuarios/**" };
+    private static final String[] PUBLIC_MATCHERS = { "/h2-console/**" };
 
     private final Environment env;
     private final JWTUtil jwtUtil;

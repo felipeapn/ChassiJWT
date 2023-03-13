@@ -8,6 +8,8 @@ import com.felipeapn.ChassiJWT.security.entity.Usuario;
 import com.felipeapn.ChassiJWT.security.repository.PessoaRepository;
 import com.felipeapn.ChassiJWT.security.repository.UsuarioRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +23,8 @@ public class UsuarioService {
 
     private PessoaRepository pessoaRepository;
 
+    private BCryptPasswordEncoder encoder;
+
     public UsuarioDTO findById (Long id) {
         Optional<Usuario> optionalUsuario = usuarioRepository.findById(id);
         return new UsuarioDTO(optionalUsuario.orElseThrow(() -> new ObjectNotFoundException("Usuario não encontrado")));
@@ -32,9 +36,17 @@ public class UsuarioService {
 
     public Usuario create(UsuarioDTO usuarioDTO) {
         usuarioDTO.setId(null);
+        usuarioDTO.setSenha(encoder.encode(usuarioDTO.getSenha()));
         emailValidation(usuarioDTO);
         Usuario usuario = new Usuario(usuarioDTO);
         return usuarioRepository.save(usuario);
+    }
+
+    public Usuario update(Long id, UsuarioDTO usuarioDTO) {
+        usuarioDTO.setId(id);
+        UsuarioDTO oldUsuario = findById(id);
+        emailValidation(usuarioDTO);
+        return usuarioRepository.save(new Usuario(oldUsuario));
     }
 
     private void emailValidation(UsuarioDTO usuarioDTO) {
